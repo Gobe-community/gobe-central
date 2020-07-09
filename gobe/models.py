@@ -30,10 +30,8 @@ class Profile(models.Model):
     
     # Additional data that belongs to User profile
     # Examples:
-    # Display Name
+    # Date_of_birth
     # Bios, descriptions, taglines
-    # Theme (light or dark)
-    # email (if not used to log in)
 
 
 #create a Profile and bind to a newly created User
