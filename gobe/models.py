@@ -15,7 +15,7 @@ class UserAccountManager(UserManager):
 
 class User(AbstractUser):
     """auth/login-related fields"""
-    email = models.CharField(max_length=100)
+    email = models.CharField(max_length=254)
     password = models.CharField(max_length=100)
     
     # NOTE: before putting something here make sure it wouldn't be better in the profile model
@@ -26,7 +26,10 @@ class User(AbstractUser):
 class Profile(models.Model):
     """non-auth-related/cosmetic fields"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.CharField(max_length=400)
+    bio = models.CharField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    email_confirmed = models.BooleanField(default=False)
     
     # Additional data that belongs to User profile
     # Examples:
@@ -40,6 +43,4 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
      if created:
          Profile.objects.create(user=instance)
-@receiver(post_save, sender=User) 
-def save_user_profile(sender, instance, **kwargs):
      instance.profile.save()
