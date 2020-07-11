@@ -1,4 +1,3 @@
-from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
@@ -31,9 +30,6 @@ class SignUpView(View):
         if form.is_valid():
             user = form.save()
             user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
             return redirect('home')
         
             

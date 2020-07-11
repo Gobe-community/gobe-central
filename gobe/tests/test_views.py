@@ -1,6 +1,6 @@
 from django.test import RequestFactory
 
-from .. import views
+from .. import views, models
 
 class TestSignUpView:
 
