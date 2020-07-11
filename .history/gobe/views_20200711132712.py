@@ -42,9 +42,9 @@ def login_view(request):
                 # messages.info(request, f"You are now logged in as {username}")
                 return redirect('home')
             else:
-                return render(request, 'login.html', {'message': "Invalid username or password."})
+                messages.error(request, "Invalid username or password.")
         else:
-            return render(request, 'login.html', {'message': "Invalid username or password."})
+            messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
                     template_name = "login.html",

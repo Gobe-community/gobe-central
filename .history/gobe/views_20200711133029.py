@@ -44,7 +44,7 @@ def login_view(request):
             else:
                 return render(request, 'login.html', {'message': "Invalid username or password."})
         else:
-            return render(request, 'login.html', {'message': "Invalid username or password."})
+            return redirect(request, {'message': "Invalid username or password."})
     form = AuthenticationForm()
     return render(request = request,
                     template_name = "login.html",

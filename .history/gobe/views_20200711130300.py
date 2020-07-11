@@ -1,6 +1,5 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import SignUpForm
 
 #Create your views here
@@ -32,20 +31,13 @@ def signup(request):
 def login_view(request):
     """Handles request for log in page"""
     if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                # messages.info(request, f"You are now logged in as {username}")
-                return redirect('home')
-            else:
-                return render(request, 'login.html', {'message': "Invalid username or password."})
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render('home')
         else:
-            return render(request, 'login.html', {'message': "Invalid username or password."})
-    form = AuthenticationForm()
-    return render(request = request,
-                    template_name = "login.html",
-                    context = {"form":form})
+            return render(request, 'login.html',{'message': 'Bad username or password'})
+    else:
+        return render(request, 'login.html')
