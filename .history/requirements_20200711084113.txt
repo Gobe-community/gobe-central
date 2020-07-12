@@ -3,4 +3,3 @@ pytest
 mixer
 pytest-django
 pytest-cov
-djangorestframework

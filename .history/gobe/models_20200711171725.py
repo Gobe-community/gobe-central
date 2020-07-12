@@ -9,7 +9,7 @@ from django.dispatch import receiver
 class User(AbstractUser):
     """auth/login-related fields"""
     username = None
-    email = models.EmailField(unique=True)
+    email = models.CharField(max_length=254)
     password = models.CharField(max_length=100)
     
     # NOTE: before putting something here make sure it wouldn't be better in the profile model

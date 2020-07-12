@@ -16,4 +16,4 @@ class SignUpUserForm(UserChangeForm):
     
     class Meta:
         model = User
-        fields = ('email',)
+        firlds = ('email',)
