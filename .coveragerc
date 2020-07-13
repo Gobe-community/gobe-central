@@ -1,6 +1,6 @@
 [run]
 omit =             
-  *app.py,
+  *apps.py,
   *migrations/*,
   *settings*,
   *tests/*,
