@@ -20,6 +20,5 @@ from django.urls import path, include
 # app_name = 'gobe'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('gobe.urls')),
-
+    path('home', include('gobe.urls')),
 ]

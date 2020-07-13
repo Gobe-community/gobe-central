@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
-from .forms import SignUpForm, SignUpUserForm
+from .forms import SignUpForm, CustomUserChangeForm
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
     add_form = SignUpForm
-    form = SignUpUserForm
+    form = CustomUserChangeForm
     model = User
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
