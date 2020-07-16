@@ -1,4 +1,4 @@
-from . settings import *
+from . settings import DATABASES, EMAIL_BACKEND
 
 DATABASES = {
     "default": {
