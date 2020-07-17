@@ -4,3 +4,5 @@ mixer
 pytest-django
 pytest-cov
 djangorestframework
+django-heroku
+gunicorn

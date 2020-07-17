@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from gobe import views
 
-# app_name = 'gobe'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('gobe.urls')),
+    path('frontend/api/', include('accounts.urls')),
 
 ]
