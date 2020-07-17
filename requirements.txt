@@ -6,3 +6,5 @@ pytest-cov
 djangorestframework
 django-heroku
 gunicorn
+django-filter
+psycopg2
