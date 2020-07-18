@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-    'django_filters',
+    'django-filters',
 ]
 
 MIDDLEWARE = [
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.pstgresql',
         'HOST': 'localhost',
         'NAME': 'gobe_central',
         'USER': 'postgres',
-        'PASSWORD': 'typewritter',
+        'password': 'typewritter',
         'PORT': '5432',
     }
 }
