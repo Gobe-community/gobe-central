@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'gobe_central',
         'USER': 'postgres',
         'PASSWORD': '#Proteensheykh94',
-        'PORT': '63213',
+        'PORT': '5432',
     }
 }
 
