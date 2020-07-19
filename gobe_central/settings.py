@@ -92,7 +92,7 @@ DATABASES = {
         'HOST': 'localhost',
         'NAME': 'gobe_central',
         'USER': 'postgres',
-        'PASSWORD': 'typewritter',
+        'PASSWORD': '#Proteensheykh94',
         'PORT': '5432',
     }
 }
@@ -136,6 +136,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+#location where django collect all static files
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+# location where you will store your static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'accounts/static'),
+]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
