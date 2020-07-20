@@ -166,6 +166,5 @@ pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/code,django,venv
 
-/static
 .history/
 /staticfiles
