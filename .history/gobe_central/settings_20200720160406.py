@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'nameofapp.herokuapp.com']
 
 # Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,48 +39,25 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-<<<<<<< HEAD
-    'django_filters',
-<<<<<<< HEAD
-    'rest_framework_swagger',
-    'corsheaders',
-=======
-=======
-    'corsheaders',
-
     # 'django_filters',
     'rest_framework_swagger',
->>>>>>> sync local stable version with git
+    'corsheaders',
     'whitenoise.runserver_nostatic',
->>>>>>> change settings
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    'corsheader.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-<<<<<<< HEAD
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-    'corsheader.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-=======
-    'whitenoise.middleware.WhiteNoiseMiddleware',
->>>>>>> change settings
-=======
     'django.middleware.clickjacking.XFrameOptionsMiddleware',    
->>>>>>> sync local stable version with git
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'gobe_central.urls'
 
