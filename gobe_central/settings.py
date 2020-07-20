@@ -152,10 +152,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # location where you will store your static files
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'accounts/static'),
-]
-
+STATICFILES_DIRS = []
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #Custom User model for GoBe
