@@ -168,3 +168,4 @@ pip-selfcheck.json
 
 /static
 .history/
+/staticfiles
