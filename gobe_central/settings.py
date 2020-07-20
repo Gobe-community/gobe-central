@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_swagger',
     'corsheaders',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheader.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'gobe_central.urls'
@@ -94,7 +96,7 @@ DATABASES = {
         'HOST': 'localhost',
         'NAME': 'gobe_central',
         'USER': 'postgres',
-        'PASSWORD': 'typewritter',
+        'PASSWORD': '#Proteensheykh94',
         'PORT': '5432',
     }
 }
@@ -143,9 +145,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+#location where django collect all static files
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+# location where you will store your static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'accounts/static'),
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 #Custom User model for GoBe
 AUTH_USER_MODEL = 'accounts.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 django_heroku.settings(locals())
+
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'nameofapp.herokuapp.com']
