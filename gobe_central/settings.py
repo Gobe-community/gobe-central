@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -115,13 +116,16 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'NAME': 'gobe_central',
-        'USER': 'postgres',
-        'PASSWORD': 'typewritter',
+        'HOST': 'ec2-3-229-210-93.compute-1.amazonaws.com',
+        'NAME': 'deop99msgsvohn',
+        'USER': 'zihyqsikxehsfs',
+        'PASSWORD': '61c2c125bb416d3b0ebd5a0eae673ccfca109011990a7a1b4e3ef7e3584fb485',
         'PORT': '5432',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
@@ -167,7 +171,7 @@ USE_TZ = True
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 #location where django collect all static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 
