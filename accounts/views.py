@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
@@ -39,6 +40,7 @@ class UserList(generics.ListCreateAPIView):
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        send_mail('Welcome to GoBe', 'Thank you for signing Up.', 'smomoh96@gmail.com', ['everybees@gmail.com'], fail_silently=False)
         return self.create(request, *args, **kwargs)
 
 # @csrf_exempt
