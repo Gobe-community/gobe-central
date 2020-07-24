@@ -35,7 +35,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'everybees.pythonanywhere.com']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'everybees.pythonanywhere.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -178,4 +178,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-onboarding.herokuapp.com']
-
