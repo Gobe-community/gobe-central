@@ -11,8 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-# import django_heroku
+import django_heroku
 # import dj_database_url
+
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,10 +30,10 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'enhut@5vyq2o#e7*(4h^ov04%l))gmmr749_3%e48#r2f5b##v'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-onboarding.herokuapp.com']
 
@@ -114,14 +122,7 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'NAME': 'gobe_central',
-        'USER': 'postgres',
-        'PASSWORD': '#Proteensheykh94',
-        'PORT': '5432',
-    }
+    'default': env.db(),
 }
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
@@ -184,7 +185,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 django_heroku.settings(locals())
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
