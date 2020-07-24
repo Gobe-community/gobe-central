@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'accounts',
     'django_filters',
     'rest_framework_swagger',
-    'corsheaders',
     'whitenoise.runserver_nostatic',
     
 ]
@@ -66,7 +65,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheader.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
