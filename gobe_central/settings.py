@@ -47,20 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-<<<<<<< HEAD
     'django_filters',
-<<<<<<< HEAD
     'rest_framework_swagger',
     'corsheaders',
-=======
-=======
-    'corsheaders',
-
-    # 'django_filters',
-    'rest_framework_swagger',
->>>>>>> sync local stable version with git
     'whitenoise.runserver_nostatic',
->>>>>>> change settings
+
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -74,17 +65,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-<<<<<<< HEAD
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-    'corsheader.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-=======
     'whitenoise.middleware.WhiteNoiseMiddleware',
->>>>>>> change settings
-=======
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',    
->>>>>>> sync local stable version with git
+
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
