@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'corsheaders',
     'whitenoise.runserver_nostatic',
-
+    
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -66,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheader.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
@@ -105,6 +107,7 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 # }
 
 DATABASES = {
+
     'default': env.db(),
 }
 
@@ -175,3 +178,6 @@ EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-onboarding.herokuapp.com']
+
