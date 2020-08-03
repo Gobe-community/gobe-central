@@ -35,11 +35,14 @@ class Profile(models.Model):
     # Date_of_birth
     # Bios, descriptions, taglines
 
+    def __str__(slef):
+        return slef.user.get_full_name()
+
 
 #create a Profile and bind to a newly created User
-"""receivers to add a Profile for newly created users"""
-@receiver(post_save, sender=User) 
-def create_user_profile(sender, instance, created, **kwargs):
-     if created:
-         Profile.objects.create(user=instance)
-     instance.profile.save()
+# """receivers to add a Profile for newly created users"""
+# @receiver(post_save, sender=User) 
+# def create_user_profile(sender, instance, created, **kwargs):
+#      if created:
+#          Profile.objects.create(user=instance)
+#      instance.profile.save()

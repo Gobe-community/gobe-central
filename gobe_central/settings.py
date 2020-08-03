@@ -94,17 +94,17 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
-
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
+# DATABASES = {
+
+#     'default': env.db(),
+# }
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
@@ -166,6 +166,8 @@ AUTH_USER_MODEL = 'accounts.User'
 
 django_heroku.settings(locals())
 
+del DATABASES['default']['OPTIONS']['sslmode']
+
 SENDGRID_API_KEY = env('SENDGRID_API_KEY')
 
 EMAIL_HOST = 'smtp.sendgrid.net'
@@ -174,4 +176,4 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-home.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-home.herokuapp.com', '5f2715a46488201d3c914ef1--tobecentral-frontend.netlify.app/']

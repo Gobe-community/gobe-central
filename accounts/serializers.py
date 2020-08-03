@@ -3,23 +3,23 @@ from rest_framework import serializers
 from .models import User, Profile
 
 
-#User serializer
-class UserSerializer(serializers.ModelSerializer):
+# #User serializer
+# class UserSerializer(serializers.ModelSerializer):
     
-    class Meta:
-        model = User
-        fields = ['id','first_name', 'last_name', 'email', 'password']
+#     class Meta:
+#         model = User
+#         fields = ['id','first_name', 'last_name', 'email', 'password']
 
 
 #Profile serializer
 class ProfileSerilalizer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['user', 'bio', 'location', 'birth_date', 'email_confirm']
+        fields = ['bio', 'location', 'birth_date', 'email_confirmed']
 
 
 #SignUp form serializer
-class SignupSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerilalizer(required=True)
 
     class Meta:
@@ -27,23 +27,24 @@ class SignupSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name', 'email', 'password', 'profile')
         extra_kwargs = {'password': {'write_only': True}}
 
-        def create(self, validated_data):
-            
-            #create user
-            user = User.objects.create_user(
-                validated_data['first_name'],
-                validated_data['last_name'],
-                validated_data['email'],
-                validated_data['password']
-            )
+    def create(self, validated_data):
+        profile_data = validated_data.pop('profile')
+        #create profile
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        Profile.objects.update_or_create(user=user, **profile_data)
+        return user
+    
+    def update(self, instance, validated_data):
+        profile_data = validated_data.pop('profile')
+        profile = instance.profile
 
-            profile_data = validated_data.pop('profile')
-            #create profile
-            profile = Profile.objects.create(
-                user = user,
-                bio = profile_data['bio'],
-                location = profile_data['location'],
-                birthdate= profile_data['birth_date'],
-                email_confirmed = ['email_confirmed']
-            )
-            return user
+        instance.email = profile_data.get('bio', profile.bio)
+        profile.location = profile_data.get('location', profile.location)
+        profile.birthdate = profile_data.get('birthdate', profile.birthdate)
+        profile.email_confirmed = profile_data.get('email_confirmed', profile.email_confirmed)
+        profile.save()
+
+        return instance
