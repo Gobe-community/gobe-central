@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_swagger',
     'whitenoise.runserver_nostatic',
+    'rest_framework.authtoken',
+    'rest_auth',
     
 ]
 
@@ -111,7 +113,16 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFALT_PERMISSION_CLASSES': ('rest_framework.permissions.isAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BaseAuthentication',
+    ),
 }
+
+REST_USE_JWT = True
 
 
 # Password validation
@@ -176,4 +187,4 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-home.herokuapp.com', '5f2715a46488201d3c914ef1--tobecentral-frontend.netlify.app/']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-home.herokuapp.com',]
