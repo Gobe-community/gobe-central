@@ -10,6 +10,17 @@ from .permissions import IsAdminUser, IsOwnerOrReadOnly
 from .models import User
 from .serializers import UserSerializer
 
+class Register(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    permission_classes = []
+    authentication_classes = []
+    
+    def post(self, request, *args, **kwargs):
+        send_mail('Welcome to GoBe', 'Thank you for signing Up.', 'smomoh96@gmail.com', ['everybees@gmail.com'], fail_silently=False)
+        return self.create(request, *args, **kwargs)
+
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -19,10 +30,6 @@ class UserList(generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        send_mail('Welcome to GoBe', 'Thank you for signing Up.', 'smomoh96@gmail.com', ['everybees@gmail.com'], fail_silently=False)
-        return self.create(request, *args, **kwargs)
         
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
