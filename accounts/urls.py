@@ -1,11 +1,14 @@
-from django.urls import path
-# from .views import UserListAPIView, UserDetailAPIView
-from .views import UserDetail, UserList
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserGenericViewSet, ProfileGenericViewSet
+
+router = DefaultRouter()
+router.register('accounts', UserGenericViewSet)
+router.register('accounts/profiles', ProfileGenericViewSet)
 
 # app_name = 'accounts'
 urlpatterns = [
-    # path('users/', UserListAPIView().as_view()),
-    # path('users/<int:pk>', UserDetailAPIView().as_view()),
-    path('users/', UserList.as_view()),
-    path('users/<int:pk>', UserDetail.as_view()),
+
+    path('v1/', include(router.urls)),
+    
 ]
