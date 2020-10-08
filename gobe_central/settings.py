@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -87,23 +86,23 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'NAME': 'gobe_central',
-        'USER': 'postgres',
-        'PASSWORD': '#Proteensheykh94',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'HOST': 'localhost',
+#         'NAME': 'gobe_central',
+#         'USER': 'postgres',
+#         'PASSWORD': '#Proteensheykh94',
+#         'PORT': '5432',
+#     }
+# }
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
@@ -137,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 
@@ -163,12 +162,17 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #Custom User model for GoBe
 AUTH_USER_MODEL = 'accounts.User'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'everybees@gmail.com'
+EMAIL_HOST_PASSWORD = 'jibolaayinke'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+MAILCHIMP_API_KEY = 'a9c3ad1383631530044aaca6bd5017e5-us2'
+MAILCHIMP_DATA_CENTER = 'us2'
+MAILCHIMP_AUDIENCE_ID = '47b880a361'
