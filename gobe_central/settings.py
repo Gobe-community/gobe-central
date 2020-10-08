@@ -11,8 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-# import django_heroku
+import django_heroku
 # import dj_database_url
+
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,12 +30,12 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'enhut@5vyq2o#e7*(4h^ov04%l))gmmr749_3%e48#r2f5b##v'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-onboarding.herokuapp.com']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'everybees.pythonanywhere.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -39,24 +47,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-    'corsheaders',
-
-    # 'django_filters',
+    'django_filters',
     'rest_framework_swagger',
     'whitenoise.runserver_nostatic',
+    
 ]
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',    
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -91,6 +98,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+
+
+#     'default': env.db(),
+# >>>>>>> in_dev
 }
 
 # DATABASES = {
@@ -166,13 +177,21 @@ AUTH_USER_MODEL = 'accounts.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'everybees@gmail.com'
 EMAIL_HOST_PASSWORD = 'jibolaayinke'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 EMAIL_USE_SSL = False
 
 MAILCHIMP_API_KEY = 'a9c3ad1383631530044aaca6bd5017e5-us2'
 MAILCHIMP_DATA_CENTER = 'us2'
 MAILCHIMP_AUDIENCE_ID = '47b880a361'
+
+
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-home.herokuapp.com']
+
