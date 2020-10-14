@@ -12,3 +12,5 @@ psycopg2==2.8.5
 pytest==5.4.3
 pytest-django==3.9.0
 whitenoise==5.1.0
+django-environ
+django-filter
