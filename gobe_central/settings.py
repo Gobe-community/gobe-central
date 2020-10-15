@@ -162,7 +162,7 @@ STATIC_URL = '/static/'
 
 # location where you will store your static files
 STATICFILES_DIRS = []
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #Custom User model for GoBe
 AUTH_USER_MODEL = 'accounts.User'
