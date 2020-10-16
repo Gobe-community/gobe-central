@@ -164,7 +164,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # django_heroku.settings(locals())
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SENDGRID_API_KEY = env('SENDGRID_API_KEY')
 

@@ -47,12 +47,9 @@ Kaabo
 Nabata
 Barka da zuwa
 
-Hello name of recipient
+Hello {}
 Thank you for joining our community and subscribing to our newsletter. Welcome on board. 
-GoBe brings you relevant information, resourceful ideas, opinion, articles and educational publications 
-
-For more details and enquiry insert a help line number or email
-You can also find us on insert social media handles
+GoBe brings you relevant information, resourceful ideas, opinion, articles and educational publications.
 
 We look forward to working together for creation of a  positive presence here.
 
@@ -60,14 +57,13 @@ Eshey
 Daalu 
 Nagode
 Thank you,
-The GoBe Team'''
+The GoBe Team'''.format(request.data['first_name'])
         # subscribe(email)
         send_mail('Welcome to goBE, {}'.format(request.data['first_name']),
                 content,
                 'everybees@gmail.com',
                 [sub_email],
                 fail_silently=False)
-        return self.create(request, *args, **kwargs)
         return self.create(request, *args, **kwargs)
 
 
