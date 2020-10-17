@@ -47,7 +47,7 @@ Kaabo
 Nabata
 Barka da zuwa
 
-Hello {}
+Hello {},
 Thank you for joining our community and subscribing to our newsletter. Welcome on board. 
 GoBe brings you relevant information, resourceful ideas, opinion, articles and educational publications.
 
@@ -58,12 +58,13 @@ Daalu
 Nagode
 Thank you,
 The GoBe Team'''.format(request.data['first_name'])
-        # subscribe(email)
+        subscribe(email)
         send_mail('Welcome to goBE, {}'.format(request.data['first_name']),
                 content,
                 'everybees@gmail.com',
                 [sub_email],
                 fail_silently=False)
+
         return self.create(request, *args, **kwargs)
 
 
