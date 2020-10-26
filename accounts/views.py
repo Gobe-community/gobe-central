@@ -58,6 +58,7 @@ Daalu
 Nagode
 Thank you,
 The GoBe Team'''.format(request.data['first_name'])
+
         subscribe(sub_email)
         send_mail('Welcome to goBE, {}'.format(request.data['first_name']),
                 content,

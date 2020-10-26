@@ -23,7 +23,7 @@ class User(AbstractUser):
     objects = UserAccountManager()
 
     def __str__(self):
-        return self.email + " (" + (" not " if not self.confirmed else "") + "confirmed)"
+        return self.email
 
 
 class Newsletter(models.Model):
