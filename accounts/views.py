@@ -42,6 +42,7 @@ class UserList(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         sub_email = request.data['email']
+        subscribe_to_newsletter = request.POST.get('confirmed', False)
         content = '''Welcome!
 Kaabo 
 Nabata
@@ -59,12 +60,17 @@ Nagode
 Thank you,
 The GoBe Team'''.format(request.data['first_name'])
 
-        subscribe(sub_email)
-        send_mail('Welcome to goBE, {}'.format(request.data['first_name']),
-                content,
-                'everybees@gmail.com',
-                [sub_email],
-                fail_silently=False)
+
+        # if (subscribe_to_newsletter == True):
+        # subscribe(sub_email)
+
+        
+
+        # send_mail('Welcome to goBE, {}'.format(request.data['first_name']),
+        #         content,
+        #         'everybees@gmail.com',
+        #         [sub_email],
+        #         fail_silently=False)
 
         return self.create(request, *args, **kwargs)
 
