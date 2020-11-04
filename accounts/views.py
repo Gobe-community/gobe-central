@@ -1,7 +1,10 @@
 import requests
 import json
 
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string, get_template
+from django.template import Context
 from rest_framework.views import APIView
 from rest_framework import generics
 from django.conf import settings
@@ -18,6 +21,7 @@ members_endpoint = f'{api_url}/lists/{MAILCHIMP_EMAIL_LIST_ID}/members'
 
 # Create your views here.
 
+# subscribe user with mailchimp
 def subscribe(email):
         data = {
             "email_address": email,
@@ -43,34 +47,22 @@ class UserList(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         sub_email = request.data['email']
         subscribe_to_newsletter = request.POST.get('confirmed', False)
-        content = '''Welcome!
-Kaabo 
-Nabata
-Barka da zuwa
+        first_name = request.data['first_name']
 
-Hello {},
-Thank you for joining our community and subscribing to our newsletter. Welcome on board. 
-GoBe brings you relevant information, resourceful ideas, opinion, articles and educational publications.
+        # Register user if they click the subscribe checkbox
+        if (subscribe_to_newsletter != False):
+            subscribe(sub_email)
 
-We look forward to working together for creation of a  positive presence here.
-
-Eshey 
-Daalu 
-Nagode
-Thank you,
-The GoBe Team'''.format(request.data['first_name'])
-
-
-        # if (subscribe_to_newsletter == True):
-        # subscribe(sub_email)
-
-        
-
-        # send_mail('Welcome to goBE, {}'.format(request.data['first_name']),
-        #         content,
-        #         'everybees@gmail.com',
-        #         [sub_email],
-        #         fail_silently=False)
+        # Sending Weolcome Mail to user
+        plaintext = get_template('welcome_mail.txt')
+        htmly = get_template('welcome_mail.html')
+        context = { "first_name": first_name }
+        subject, from_email, to = 'Welcome to GO-BE', 'everybees@gmail.com', sub_email
+        text_content = plaintext.render(context)
+        html_content = htmly.render(context)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
 
         return self.create(request, *args, **kwargs)
 

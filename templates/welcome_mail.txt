@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to GO-BE</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <img src="templates/gobe-logo.jpg">
+        </div>
+        <div class="row">
+            <p>
+                <h4>
+                    Welcome!
+                    Kaabo
+                    Nabata
+                    Barka da zuwa
+                </h4>
+                <br>
+                <h5>
+                    Welcome {first_name},
+                </h5>
+                <br>
+                <h6>
+                    Thank you for joining our community and subscribing to our newsletter. Welcome on board. 
+GoBe brings you relevant information, resourceful ideas, opinion, articles and educational publications.
+
+We look forward to working together for creation of a  positive presence here.
+                </h6><br>
+                <h3>
+                    Eshey 
+                    Daalu 
+                    Nagode
+                    Thank you,
+                </h3>
+                <br>
+                <h3>
+                    The GoBe Team
+                </h3>
+            </p>
+        </div>
+    </div>
+</body>
+<footer>
+    <p>GO-BE</p>
+</footer>
+</html>
