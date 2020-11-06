@@ -1,0 +1,8 @@
+.logo-top {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    width: 20%;
+    background-color: green;
+}

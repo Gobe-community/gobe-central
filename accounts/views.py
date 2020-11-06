@@ -1,10 +1,6 @@
 import requests
 import json
 
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.utils.html import strip_tags
-from django.template.loader import render_to_string, get_template
-from django.template import Context
 from rest_framework.views import APIView
 from rest_framework import generics
 from django.conf import settings
@@ -21,11 +17,14 @@ members_endpoint = f'{api_url}/lists/{MAILCHIMP_EMAIL_LIST_ID}/members'
 
 # Create your views here.
 
-# subscribe user with mailchimp
-def subscribe(email):
+# subscribe user to mailchimp with first_name and email
+def subscribe(email, first_name):
         data = {
             "email_address": email,
-            "status": "subscribed"
+            "status": "subscribed",
+            'merge_fields': {
+                'FNAME': first_name
+            }
         }
         r = requests.post(
             members_endpoint,
@@ -51,18 +50,7 @@ class UserList(generics.ListCreateAPIView):
 
         # Register user if they click the subscribe checkbox
         if (subscribe_to_newsletter != False):
-            subscribe(sub_email)
-
-        # Sending Weolcome Mail to user
-        plaintext = get_template('welcome_mail.txt')
-        htmly = get_template('welcome_mail.html')
-        context = { "first_name": first_name }
-        subject, from_email, to = 'Welcome to GO-BE', 'everybees@gmail.com', sub_email
-        text_content = plaintext.render(context)
-        html_content = htmly.render(context)
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-        msg.attach_alternative(html_content, "text/html")
-        msg.send()
+            subscribe(sub_email, first_name)
 
         return self.create(request, *args, **kwargs)
 
