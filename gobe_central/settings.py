@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
-# import dj_database_url
+import dj_database_url
 
 import environ
 env = environ.Env(
@@ -101,12 +101,16 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': env.db(),
-}
+# DATABASES = {
+#     'default': env.db(),
+# }
 
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
+DATABASES = {
+    'default': dj_database_url.config(
+        # default='postgres://euayajlloqqkuq:91b6dea3fcccb7bebb842007b684617c5ee887d86babe8df4f7229bf37cf11ad@ec2-52-204-232-46.compute-1.amazonaws.com:5432/daigm2bfm6gl3p', 
+        conn_max_age=600
+    )
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',

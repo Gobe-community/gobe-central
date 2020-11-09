@@ -44,13 +44,13 @@ class UserList(generics.ListCreateAPIView):
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        sub_email = request.data['email']
-        subscribe_to_newsletter = request.POST.get('confirmed', False)
-        first_name = request.data['first_name']
+        sub_email = request.data.get('email')
+        subscribe_to_newsletter = request.data.get('confirmed', False)
+        first_name = request.data.get('first_name')
 
         # Register user if they click the subscribe checkbox
         if (subscribe_to_newsletter != False):
-            subscribe(sub_email, first_name)
+           subscribe(sub_email, first_name)
 
         return self.create(request, *args, **kwargs)
 
@@ -69,4 +69,4 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
         return self.update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+                return self.destroy(request, *args, **kwargs)
