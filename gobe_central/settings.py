@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # default= env.db('DATABASE_URL'),
+        default= env.db('DATABASE_URL'),
         conn_max_age=600
     )
 }
