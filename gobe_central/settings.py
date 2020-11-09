@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # default='postgres://euayajlloqqkuq:91b6dea3fcccb7bebb842007b684617c5ee887d86babe8df4f7229bf37cf11ad@ec2-52-204-232-46.compute-1.amazonaws.com:5432/daigm2bfm6gl3p', 
+        # default= env.db('DATABASE_URL'),
         conn_max_age=600
     )
 }
