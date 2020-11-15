@@ -50,8 +50,8 @@ class UserList(generics.ListCreateAPIView):
 
         # Register user if they click the subscribe checkbox
         # if (subscribe_to_newsletter != False):
-        # subscribe(sub_email, first_name)
-        print("Subscribed")
+        subscribe(sub_email, first_name)
+        # print("Subscribed")
 
         return self.create(request, *args, **kwargs)
 
