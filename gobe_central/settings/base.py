@@ -35,8 +35,6 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'gobe-home.herokuapp.com']
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -105,12 +103,12 @@ WSGI_APPLICATION = 'gobe_central.wsgi.application'
 #     'default': env.db(),
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default= env.db('DATABASE_URL'),
-        conn_max_age=600
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default= env.db('DATABASE_URL'),
+#         conn_max_age=600
+#     )
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema',
@@ -168,20 +166,3 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AUTH_USER_MODEL = 'accounts.User'
 
 # django_heroku.settings(locals())
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-SENDGRID_API_KEY = env('SENDGRID_API_KEY')
-
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_USE_SSL = False
-
-MAILCHIMP_API_KEY = env('MAILCHIMP_API_KEY')
-MAILCHIMP_DATA_CENTER = env('MAILCHIMP_DATA_CENTER')
-MAILCHIMP_AUDIENCE_ID = env('MAILCHIMP_AUDIENCE_ID')
