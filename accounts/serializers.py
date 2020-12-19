@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from django.core.mail import send_mail
 
-from .models import User
+import accounts.models as acm
 
 
 #User serializer
 class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = User
+        model = acm.User
         fields = ['id', 'first_name', 'email', 'confirmed']
+        read_only_fields = ['id']
