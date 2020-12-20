@@ -1,72 +1,36 @@
-import requests
-import json
+from django.db import IntegrityError
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 
-from rest_framework.views import APIView
-from rest_framework import generics
-from django.conf import settings
+import accounts.models as acm
+import accounts.serializers as acs
+import accounts.tasks as act
 
-from .models import User
-from .serializers import UserSerializer
-
-MAILCHIMP_API_KEY = settings.MAILCHIMP_API_KEY
-MAILCHIMP_DATA_CENTER = settings.MAILCHIMP_DATA_CENTER
-MAILCHIMP_EMAIL_LIST_ID = settings.MAILCHIMP_AUDIENCE_ID
-
-api_url = f'https://{MAILCHIMP_DATA_CENTER}.api.mailchimp.com/3.0'
-members_endpoint = f'{api_url}/lists/{MAILCHIMP_EMAIL_LIST_ID}/members'
 
 # Create your views here.
 
-# subscribe user to mailchimp with first_name and email
-def subscribe(email, first_name):
-        data = {
-            "email_address": email,
-            "status": "subscribed",
-            'merge_fields': {
-                'FNAME': first_name
-            }
-        }
-        r = requests.post(
-            members_endpoint,
-            auth=("", MAILCHIMP_API_KEY),
-            data=json.dumps(data)
-        )
-        return r.status_code, r.json()
 
-class UserList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class SubscribeUserToNewsLetter(viewsets.ModelViewSet):
+    queryset = acm.User.objects.all()
+    serializer_class = acs.UserSerializer
 
-    permission_classes = []
-    authentication_classes = []
+    def create(self, request):
+        serializer = acs.UserSerializer(data=request.data)
 
-    def get(self, request, *args, **kwargs): 
-        return self.list(request, *args, **kwargs)
+        try:
+            email = request.data.get('email')
+            first_name = request.data.get('first_name')
 
-    def post(self, request, *args, **kwargs):
-        sub_email = request.data.get('email')
-        subscribe_to_newsletter = request.data.get('confirmed', False)
-        first_name = request.data.get('first_name')
+            if serializer.is_valid():
+                serializer.save()
 
-        # Register user if they click the subscribe checkbox
-        # if (subscribe_to_newsletter != False):
-        subscribe(sub_email, first_name)
-
-        return self.create(request, *args, **kwargs)
-
-
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-    permission_classes = []
-    authentication_classes = []
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-                return self.destroy(request, *args, **kwargs)
+                # subscibes user to mailchimp
+                act.subscribe(email, first_name)
+            
+            elif IntegrityError:
+                return Response({"message": "User with this email already exists."}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "User created and subscribed."})
+        except Exception as e:
+            return Response({"message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
