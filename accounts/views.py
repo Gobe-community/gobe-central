@@ -25,6 +25,8 @@ class SubscribeUserToNewsLetterViewSet(viewsets.ModelViewSet):
 
                 # subscribes user to mailchimp
                 act.subscribe(email, first_name)
+            elif IntegrityError:
+                return Response({"message": "User with this email already exists."}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response({"message": "User created and subscribed."}, status=status.HTTP_201_CREATED)
